@@ -6,28 +6,32 @@ const axios_instance = axios.create({
 });
 
 const dummyList = [
-	{ id: "01", title: "Learn Docker" },
-	{ id: "02", title: "Learn React" },
+	{ _id: "01", title: "Learn Docker" },
+	{ _id: "02", title: "Learn React" },
 ];
 
 export const fetchData = async () => {
-	const url = "";
+	const url = "/todo/";
 	const body = null;
 	try {
-		const res = await axios_instance.post(url, body);
-		return res;
+		const res = await axios_instance.get(url, body);
+		console.log(res);
+		return res.data ? res.data : null;
 	} catch (err) {
-		return err.response ? err.response : { data: dummyList, error: "Not connected to the server" };
+		console.log(err);
+		return { data: null, error: err.message ? err.message : "Not connected to the server" };
 	}
 };
 
 export const addData = async (todoTitle) => {
-	const url = "addtodo/";
+	const url = "/todo/addtodo/";
 	const body = { title: todoTitle };
 	try {
-		const res = await axios_instance.get(url, body);
-		return res;
+		const res = await axios_instance.post(url, body);
+		console.log(res);
+		return res.data ? res.data : null;
 	} catch (err) {
-		return err.response ? err.response : { data: dummyList, error: "Not connected to the server" };
+		console.log(err);
+		return { data: null, error: err.message ? err.message : "Not connected to the server" };
 	}
 };

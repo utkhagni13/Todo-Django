@@ -28,15 +28,18 @@ const App = () => {
 			alert("Field Empty!!");
 			return;
 		}
-		const addData = async () => {
+		const addToDoData = async () => {
 			const res = await addData(todo);
+			console.log(res);
 			if (res.data) {
-				let tempList = list;
-				tempList.push(res.data);
-				setList(tempList);
+				// let updatedList = [...list, res.data];
+				// setList(updatedList);
+				window.location.reload();
+			} else {
+				alert(res.error);
 			}
 		};
-		addData();
+		addToDoData();
 	};
 
 	return (
@@ -44,7 +47,9 @@ const App = () => {
 			<div>
 				<h1>List of TODOs</h1>
 				{list.map((item) => (
-					<li key={item.id}>{item.title}</li>
+					<div key={item._id}>
+						<li>{item.title}</li>
+					</div>
 				))}
 			</div>
 			<div>
